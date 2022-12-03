@@ -33,15 +33,15 @@ app.post("/",function(req,res){
 
     const options ={
         method : "POST",
-        auth: "roshay1:d49dd83c111621e6d95e92bde318fe71-us18"
+        auth: "roshay1:3ebe43fabe539ff87904bd6634dcca9e-us18"
     }
 
     const request = https.request(url,options, function(response){
         if (response.statusCode===200){
-            res.send("Sign Up Successful");
+            res.sendFile(__dirname + "/success.html");
         }
         else{
-            res.send("Sign Up Failed. Something went wrong");
+            res.sendFile(__dirname + "/failure.html");
         }
 
         response.on("data", function(data){
@@ -54,16 +54,20 @@ app.post("/",function(req,res){
     request.end();
 })
 
+app.post("/failure", function(req,res){
+    res.redirect("/")
+})
+
 app.get("/", function(request,response){
     response.sendFile(__dirname + "/signup.html");
    
 })
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server is running at port 3000");
 })
 
 
 // API key
-// d49dd83c111621e6d95e92bde318fe71-us18
+// d49dd83c111621e6d95e92bde318fe71-us18  -->Yo chai purano ho
